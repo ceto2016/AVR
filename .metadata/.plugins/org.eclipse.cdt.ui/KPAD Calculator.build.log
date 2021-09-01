@@ -1,0 +1,10 @@
+03:27:01 **** Incremental Build of configuration Debug for project KPAD Calculator ****
+make all 
+Building target: KPAD Calculator.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,KPAD Calculator.map -mmcu=atmega32 -o "KPAD Calculator.elf"  ./MCAL/3-\ GIE/GIE_program.o  ./MCAL/2-\ EXTI/EXTI_Program.o  ./MCAL/1-DIO/DIO_program.o  ./HAL/5-KEYPAD/KPD_program.o  ./HAL/4-LCD/CLCD_program.o  ./main.o   
+avr-gcc.exe: Calculator.map: No such file or directory
+make: *** [KPAD Calculator.elf] Error 1
+
+03:27:02 Build Finished (took 653ms)
+

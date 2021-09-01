@@ -1,0 +1,9 @@
+#include "Services/STD_TYPE.h"
+#include "MCAL/1-DIO/DIO_interface.h"
+#include "util/delay.h"
+int main(){
+	DIO_ErrorStatus result;
+	while(1){
+	}
+	return 0;
+}

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete 5 resources" deleteContents="false" description="Delete 5 resources" element1="/interFacing/HAL/1-LED" element2="/interFacing/HAL/2-SW" element3="/interFacing/HAL/3-SSD" element4="/interFacing/HAL/4-LCD" element5="/interFacing/HAL/5-KEYPAD" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="5" stamp="1617648081576"/>&#x0A;<refactoring comment="Delete resource &apos;interFacing/main_files&apos;" deleteContents="false" description="Delete resource &apos;interFacing/main_files&apos;" element1="/interFacing/main_files" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1617648165393"/>
+</session>

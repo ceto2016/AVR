@@ -1,0 +1,25 @@
+#include "Services/STD_TYPE.h"
+#include "Services/BIT_MATH.h"
+#include "util/delay.h"
+
+#include "MCAL/1-DIO/DIO_interface.h"
+
+#include "MCAL/2-EXTI/EXTI_interface.h"
+#include "MCAL/3-GIE/GIE_interface.h"
+
+void EXTLINE0_Func(void ){
+	DIO_enumSetPinDirection(DIO_PORTA , DIO_PIN1,DIO_OUTPUT);
+	TOG_BIT (PORTC , DIO_PIN1);
+}
+
+int main(){
+	EXTI_voidEnable(EXTI_LINE0, FallingEdge );
+	EXTI_voidSetCallBack(EXTLINE0_Func,EXTI_LINE0);
+	GIE_voidDisabelGIE();
+	while(1){
+		TOG_BIT (DIO_PORTA , DIO_PIN2);
+		_delay_ms(500);
+	}
+	return 0;
+}
+

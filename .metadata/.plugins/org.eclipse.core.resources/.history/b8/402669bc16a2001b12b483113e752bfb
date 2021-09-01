@@ -1,0 +1,247 @@
+/*
+ * main.c
+ *
+ *  Created on: Jan 29, 2021
+ *      Author: Kishk
+ *
+ */
+
+#include "../Services/STD_TYPES.h"
+#include "../Services/BIT_MATHS.h"
+#include "util/delay.h"
+#include "../MCAL/01-DIO/DIO_interface.h"
+#include "../HAL/04- CLCD/CLCD_interface.h"
+#include "../HAL/05- Keypad/Keypad_interface.h"
+
+typedef enum
+{
+    Status_Ok,
+    Status_Not_Ok
+
+} DivideByZero;
+
+DivideByZero calcDIVandMul(s16 *Copy_u8ArrOperend, u8 *LOC_u8ArrOprations, u8 *LOC_u8ArrOprationsIndex);
+s16 calcADDandSUB(s16 *Copy_u8ArrOperend, u8 *Copy_u8ArrOprations, u8 *Copy_u8ArrOprationsIndex);
+
+u8 toInt(u8 Copy_u8Ch);
+void clearArray(u8 *Copy_ptrArray);
+
+int main(void) {
+	CLCD_voidInit();
+	Keypad_voidInit();
+	u8 LOC_u8ComeData = 0;
+//	arrays
+	u16 LOC_u8ArrOperands[10] 	   		   = { 0 };
+	u8 LOC_u8ArrOperations[10] 	  		   = { 0 };
+	u8 LOC_u8ArrOperandsLength[10] 		   = { 0 };
+	u8 LOC_u8ArrOprationsIndex[10]         = { 0 };
+// counters
+	u8 LOC_u8Iterator = 0;
+	u8 LOC_u8Counter = 0;
+	u8 LOC_u8OperationIndexCounter = 0;
+	u8 LOC_u8OperationCounter = 0;
+//	flags
+	u8 LOC_u8OperationFlag	=	0;
+	DivideByZero DivideByZeroFlag = Status_Ok;
+	s32 LOC_s32Result 		=	0;
+//	welcome
+	CLCD_voidSetPosition(CLCD_ROW_1, CLCD_COL_1);
+	CLCD_voidSendString((u8 *) "Welcome !");
+	_delay_ms(1000);
+	CLCD_voidClearDisplay();
+	while (1) {
+		LOC_u8ComeData = Keypad_u8GetPressed();
+		if (LOC_u8ComeData != 0) {
+			switch(LOC_u8ComeData){
+			case 'E':
+				DivideByZeroFlag = calcDIVandMul(LOC_u8ArrOperands, LOC_u8ArrOperations, LOC_u8ArrOprationsIndex);
+				    if (DivideByZeroFlag == Status_Not_Ok)
+				    {
+				        printf("Error");
+				    }
+				    else
+				    {
+				    	LOC_s32Result = calcADDandSUB(LOC_u8ArrOperands, LOC_u8ArrOperations, LOC_u8ArrOprationsIndex);
+
+				    	CLCD_voidSendData(LOC_s32Result);
+				    }
+				 break;
+
+			case 'C':
+				CLCD_voidClearDisplay();
+				LOC_u8Iterator = 0;
+				LOC_u8Counter = 0;
+				LOC_u8ComeData = 0;
+				clearArray(LOC_u8ArrOperations);
+				clearArray(LOC_u8ArrOperands);
+				clearArray(LOC_u8ArrOperandsLength);
+				LOC_u8OperationCounter = 0;
+				LOC_u8OperationFlag	=	0;
+				DivideByZero DivideByZeroFlag = Status_Ok;
+				LOC_s32Result 		=	0;
+				break;
+
+			case '+':
+				if(LOC_u8OperationFlag != 1){
+				LOC_u8ArrOperations[LOC_u8OperationCounter] = '+' ;
+				LOC_u8OperationCounter++;
+				LOC_u8Counter++;
+				LOC_u8OperationFlag = 1;
+				CLCD_voidSendData('+');
+				}
+				else{
+					LOC_u8ArrOperations[LOC_u8OperationCounter - 1] = '+' ;
+					CLCD_voidSetPosition(CLCD_ROW_1 , LOC_u8Counter);
+					CLCD_voidSendData('+');
+
+				}
+				break;
+
+			case '-':
+				if(LOC_u8OperationFlag != 1){
+				LOC_u8ArrOperations[LOC_u8OperationCounter] = '-' ;
+				LOC_u8OperationCounter++;
+				LOC_u8OperationFlag = 1;
+				LOC_u8Counter++;
+				CLCD_voidSendData('-');
+				}
+				else{
+					LOC_u8ArrOperations[LOC_u8OperationCounter - 1] = '-' ;
+					CLCD_voidSetPosition(CLCD_ROW_1 , LOC_u8Counter);
+					CLCD_voidSendData('-');
+				}
+				break;
+
+			case '*':
+				if(LOC_u8OperationFlag != 1){
+				LOC_u8ArrOperations[LOC_u8OperationCounter] = '*' ;
+				LOC_u8ArrOprationsIndex[LOC_u8OperationIndexCounter]= LOC_u8OperationCounter;
+				LOC_u8OperationIndexCounter++;
+				LOC_u8OperationCounter++;
+				LOC_u8OperationFlag = 1;
+				LOC_u8Counter++;
+				CLCD_voidSendData('*');
+
+				}
+				else{
+					LOC_u8ArrOperations[LOC_u8OperationCounter - 1] = '*' ;
+					LOC_u8ArrOprationsIndex[LOC_u8OperationIndexCounter]= LOC_u8OperationCounter;
+					CLCD_voidSetPosition(CLCD_ROW_1 , LOC_u8Counter);
+					CLCD_voidSendData('*');
+				}
+				break;
+
+			case '/':
+				if(LOC_u8OperationFlag != 1){
+				LOC_u8ArrOperations[LOC_u8OperationCounter] = '/' ;
+				LOC_u8ArrOprationsIndex[LOC_u8OperationIndexCounter]= LOC_u8OperationCounter;
+				LOC_u8OperationIndexCounter++;
+				LOC_u8OperationCounter++;
+				LOC_u8OperationFlag = 1;
+				LOC_u8Counter++;
+				CLCD_voidSendData('/');
+				}
+				else{
+					LOC_u8ArrOperations[LOC_u8OperationCounter - 1] = '/' ;
+					LOC_u8ArrOprationsIndex[LOC_u8OperationIndexCounter]= LOC_u8OperationCounter;
+					CLCD_voidSetPosition(CLCD_ROW_1 , LOC_u8Counter);
+					CLCD_voidSendData('/');
+				}
+				break;
+
+			default:
+				LOC_u8OperationFlag = 0;
+				LOC_u8Counter++;
+				CLCD_voidSendData(LOC_u8ComeData);
+				if(LOC_u8ArrOperandsLength[LOC_u8OperationCounter] == 0){
+					LOC_u8ArrOperands[LOC_u8OperationCounter] = toInt(LOC_u8ComeData);
+					LOC_u8ArrOperandsLength[LOC_u8OperationCounter]++;
+				}
+				else{
+					LOC_u8ArrOperands[LOC_u8OperationCounter] = LOC_u8ArrOperands[LOC_u8OperationCounter] * 10 +  toInt(LOC_u8ComeData);
+					LOC_u8ArrOperandsLength[LOC_u8OperationCounter]++;
+				}
+				break;
+
+			}
+		}
+	}
+	return 0;
+
+}
+
+
+u8 toInt(u8 Copy_u8Ch){
+	return Copy_u8Ch - '0';
+}
+
+
+void clearArray(u8 *Copy_ptrArray){
+	for(u8 LOC_u8Iterator = 0 ; LOC_u8Iterator < 10 ; LOC_u8Iterator++){
+		Copy_ptrArray[LOC_u8Iterator] = 0;
+	}
+}
+
+
+DivideByZero calcDIVandMul(s16 *Copy_u8ArrOperend, u8 *Copy_u8ArrOprations, u8 *Copy_u8ArrOprationsIndex)
+{
+    DivideByZero Loc_DivideByZero = Status_Ok;
+    s16 LOC_u8Res = 0;
+    u8 index = 0;
+    for (u8 i = 0; i < 10; i++)
+    {
+        index = *(Copy_u8ArrOprationsIndex + i);
+        switch (*(Copy_u8ArrOprations + index))
+        {
+        case '*':
+            LOC_u8Res = *(Copy_u8ArrOperend + index) * (*(Copy_u8ArrOperend + index + 1));
+            *(Copy_u8ArrOperend + index) = 0;
+            *(Copy_u8ArrOperend + index + 1) = LOC_u8Res;
+            *(Copy_u8ArrOprations + index) = '+';
+            break;
+        case '/':
+            if (*(Copy_u8ArrOperend + index + 1) == 0)
+            {
+                Loc_DivideByZero = Status_Not_Ok;
+                return Loc_DivideByZero;
+            }
+            else
+            {
+                LOC_u8Res = *(Copy_u8ArrOperend + index) / *(Copy_u8ArrOperend + index + 1);
+                *(Copy_u8ArrOperend + index) = 0;
+                *(Copy_u8ArrOperend + index + 1) = LOC_u8Res;
+                *(Copy_u8ArrOprations + index) = '+';
+                break;
+            }
+        }
+    }
+    return Loc_DivideByZero;
+}
+s16 calcADDandSUB(s16 *Copy_u8ArrOperend, u8 *Copy_u8ArrOprations, u8 *Copy_u8ArrOprationsIndex)
+{
+    u8 LOC_u8Res = 0;
+    u8 i;
+    for (i = 0; i < 10; i++)
+    {
+        switch (*(Copy_u8ArrOprations + i))
+        {
+        case '+':
+            LOC_u8Res = *(Copy_u8ArrOperend + i) + (*(Copy_u8ArrOperend + i + 1));
+            *(Copy_u8ArrOperend + i) = 0;
+            *(Copy_u8ArrOperend + i + 1) = LOC_u8Res;
+            break;
+        case '-':
+            if (*(Copy_u8ArrOperend + i + 1) == 0)
+            {
+            }
+            else
+            {
+                LOC_u8Res = *(Copy_u8ArrOperend + i) - *(Copy_u8ArrOperend + i + 1);
+                *(Copy_u8ArrOperend + i) = 0;
+                *(Copy_u8ArrOperend + i + 1) = LOC_u8Res;
+                break;
+            }
+        }
+    }
+    return LOC_u8Res;
+}

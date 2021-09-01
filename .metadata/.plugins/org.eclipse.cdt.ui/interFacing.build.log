@@ -1,0 +1,7 @@
+03:26:24 **** Clean-only build of configuration Debug for project interFacing ****
+make clean 
+rm -rf  interFacing.hex  ./app/main.o  ./MCAL/3-GIE/GIE_program.o  ./MCAL/02-\ EXTI/EXTI_Program.o  sizedummy  interFacing.lss  ./app/main.d  ./MCAL/3-GIE/GIE_program.d  ./MCAL/02-\ EXTI/EXTI_Program.d  interFacing.elf
+ 
+
+03:26:24 Build Finished (took 440ms)
+

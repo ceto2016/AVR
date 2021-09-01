@@ -1,0 +1,40 @@
+20:56:53 **** Incremental Build of configuration Debug for project DIO_PROGRAM ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+In file included from ../main.c:4:
+c:/my files/emmbeded sys/imt tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: DIO_PROGRAM.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,DIO_PROGRAM.map -mmcu=atmega32 -o "DIO_PROGRAM.elf"  ./CLCD_program.o ./DIO_program.o ./KPD_program.o ./LED_program.o ./SSD_program.o ./SW_program.o ./main.o   
+Finished building target: DIO_PROGRAM.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S DIO_PROGRAM.elf  >"DIO_PROGRAM.lss"
+Finished building: DIO_PROGRAM.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex DIO_PROGRAM.elf  "DIO_PROGRAM.hex"
+Finished building: DIO_PROGRAM.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 DIO_PROGRAM.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:   18058 bytes (55.1% Full)
+(.text + .data + .bootloader)
+
+Data:        298 bytes (14.6% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+20:56:57 Build Finished (took 4s.777ms)
+

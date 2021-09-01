@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;LED_config.h, LED_interface.h, LED_private.h, LED_program.c&apos; to &apos;1-LED&apos;" description="Move 4 resources to &apos;1-LED&apos;" destination="HAL/1-LED" element1="HAL/4-LCD/LED_config.h" element2="HAL/4-LCD/LED_interface.h" element3="HAL/4-LCD/LED_private.h" element4="HAL/4-LCD/LED_program.c" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="4" stamp="1614139549878" updateReferences="true"/>
+</session>

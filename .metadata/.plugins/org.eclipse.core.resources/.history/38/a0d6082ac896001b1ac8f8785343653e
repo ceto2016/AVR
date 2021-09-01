@@ -1,0 +1,14 @@
+#include "Services/STD_TYPE.h"
+#include "MCAL/1-DIO/DIO_interface.h"
+#include "util/delay.h"
+int main(){
+	DIO_ErrorStatus result;
+	DIO_enumSetPortDirection(DIO_PORTA,DIO_OUTPUT);
+	while(1){
+		DIO_enumSetPortDirection(DIO_PORTA,DIO_OUTPUT);
+	}
+	return 0;
+
+}
+void moveStteperMotor(){
+}

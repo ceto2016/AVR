@@ -1,0 +1,35 @@
+#include "Services/STD_TYPE.h"
+#include "Services/BIT_MATH.h"
+#include "util/delay.h"
+
+#include "MCAL/1-DIO/DIO_interface.h"
+#include "MCAL/1-DIO/DIO_private.h"
+#include "MCAL/02- EXTI/EXTI_interface.h"
+#include "MCAL/3-GIE/GIE_interface.h"
+
+void Interrupt_Toggle0LED(void);
+
+int main(){
+	DIO_enumSetPinDirection(DIO_PORTD , DIO_PIN2, DIO_INPUT);
+	DIO_voidActivePullUp(DIO_PORTD,DIO_PIN2);
+
+	DIO_enumSetPinDirection(DIO_PORTA , DIO_PIN0, DIO_OUTPUT);
+	DIO_enumSetPinDirection(DIO_PORTA , DIO_PIN2, DIO_OUTPUT);
+
+	EXTI_voidInit();
+
+	EXTI_voidSetCallBack(Interrupt_Toggle0LED , EXTI_LINE0);
+
+	GIE_voidEnableGIE();
+	while(1){
+		DIO_enumSetPinValue(DIO_PORTA , DIO_PIN0,DIO_HIGH);
+		_delay_ms(500);
+		DIO_enumSetPinValue(DIO_PORTA , DIO_PIN0,DIO_LOW);
+		_delay_ms(500);
+	}
+	return 0;
+}
+void Interrupt_Toggle0LED(void) {
+	DIO_enumTogglePinValue(DIO_PORTC,DIO_PIN1);
+}
+

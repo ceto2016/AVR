@@ -1,0 +1,16 @@
+/*
+ * Timer_interface.h
+ *
+ *  Created on: Apr 28, 2021
+ *      Author: ceto2
+ */
+
+#ifndef HAL_TIMER_TIMER_INTERFACE_H_
+#define HAL_TIMER_TIMER_INTERFACE_H_
+
+
+void TIMER_voidSecondsDelay(u8 Copy_u8Seconds);
+void TIMER_voidMSecondsDelay(u8 Copy_u8MSeconds);
+void TIMER_voidUSecondsDelay(u8 Copy_u8USeconds);
+
+#endif /* HAL_TIMER_TIMER_INTERFACE_H_ */

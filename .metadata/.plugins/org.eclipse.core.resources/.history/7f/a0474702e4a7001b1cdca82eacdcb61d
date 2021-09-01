@@ -1,0 +1,39 @@
+/*
+ * Timer_config.h
+ *
+ *  Created on: Apr 28, 2021
+ *      Author: ceto2
+ */
+
+#ifndef HAL_TIMER_TIMER_CONFIG_H_
+#define HAL_TIMER_TIMER_CONFIG_H_
+
+/*
+ * options:-
+ *       Normal
+ *       PWM Phase Correct
+ *       CTC
+ *		 Fast PwM
+ * */
+
+#define Timer0_WaveFormMode Normal
+/*
+ * options:-
+ *       Normal
+ *		 Toggle
+ *       Clear
+ *		 Set
+ * */
+
+#define Timer0_CompareOutputMode Normal
+/*
+ * options:-
+ *       NoClock
+ *		 CLK
+ *
+ *		 Set
+ * */
+
+#define Timer0_ClockMode Normal
+
+#endif /* HAL_TIMER_TIMER_CONFIG_H_ */

@@ -1,0 +1,18 @@
+#include "Services/STD_TYPE.h"
+#include "MCAL/1-DIO/DIO_interface.h"
+#include "util/delay.h"
+int main(){
+	DIO_ErrorStatus result;
+	result = DIO_enumSetPinDirection(DIO_PORTA,DIO_PIN0, DIO_OUTPUT);
+	result = DIO_enumSetPinDirection(DIO_PORTA,DIO_PIN1, DIO_OUTPUT);
+
+	while(1){
+		result = DIO_enumSetPinValue(DIO_PORTA,DIO_PIN0, DIO_HIGH);
+		result = DIO_enumSetPinValue(DIO_PORTA,DIO_PIN1, DIO_LOW);
+		_delay_ms(5000);
+		result = DIO_enumSetPinValue(DIO_PORTA,DIO_PIN0, DIO_LOW);
+		result = DIO_enumSetPinValue(DIO_PORTA,DIO_PIN1, DIO_HIGH);
+		_delay_ms(5000);
+	}
+	return 0;
+}

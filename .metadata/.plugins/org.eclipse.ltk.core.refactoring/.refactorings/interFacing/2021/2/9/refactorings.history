@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;HAL, MCAL, Services, main.c&apos; to &apos;interFacing&apos;" description="Move 4 resources to &apos;interFacing&apos;" destination="/interFacing" element1="/interfacing_avr/HAL" element2="/interfacing_avr/MCAL" element3="/interfacing_avr/Services" element4="/interfacing_avr/main.c" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="4" stamp="1614139820964" updateReferences="true"/>
+</session>

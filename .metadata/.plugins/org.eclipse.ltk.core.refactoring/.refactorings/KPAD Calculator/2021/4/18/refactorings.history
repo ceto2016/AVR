@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;HAL, MCAL, Services&apos; to &apos;KPAD Calculator&apos;" description="Move 3 resources to &apos;KPAD Calculator&apos;" destination="/KPAD Calculator" element1="/Calculator/HAL" element2="/Calculator/MCAL" element3="/Calculator/Services" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="3" stamp="1619658246107" updateReferences="true"/>
+</session>

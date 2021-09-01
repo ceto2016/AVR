@@ -1,0 +1,42 @@
+#include "../Services/STD_TYPE.h"
+#include "../Services/BIT_MATH.h"
+#include "DIO_interface.h"
+#include "DIO_private.h"
+void DIO_voidSetPortDirection(u8 Copy_u8PortName, u8 Copy_u8PortDirecation)
+{
+	if ((Copy_u8PortName <= DIO_PORTD) && (Copy_u8PortName >= DIO_PORTA))
+		switch (Copy_u8PortName)
+		{
+		case DIO_PORTA:
+			DDRA = Copy_u8PortDirecation;
+	 		break;
+		case DIO_PORTB:
+			DDRB = Copy_u8PortDirecation;
+			break;
+		case DIO_PORTC:
+			DDRC = Copy_u8PortDirecation;
+			break;
+		case DIO_PORTD:
+			DDRD = Copy_u8PortDirecation;
+			break;
+		}
+}
+void DIO_voidSetPortValue(u8 Copy_u8PortName, u8 Copy_u8PortValue)
+{
+	if ((Copy_u8PortName <= DIO_PORTD) && (Copy_u8PortName >= DIO_PORTA))
+		switch (Copy_u8PortName)
+		{
+		case DIO_PORTA:
+			PORTA = Copy_u8PortValue;
+			break;
+		case DIO_PORTB:
+			PORTB = Copy_u8PortValue;
+			break;
+		case DIO_PORTC:
+			PORTC = Copy_u8PortValue;
+			break;
+		case DIO_PORTD:
+			PORTD = Copy_u8PortValue;
+			break;
+		}
+}

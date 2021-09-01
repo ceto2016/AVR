@@ -1,0 +1,17 @@
+#include "./Services/STD_TYPE.h"
+#include "./Services/BIT_MATH.h"
+
+#include <util/delay.h>
+#include "MCAL/1-DIO/DIO_interface.h"
+#include "HAL/4-LCD/CLCD_interface.h"
+#include "HAL/5-KEYPAD/KPD_interface.h"
+#include "HAL/3-SSD/SSD_interface.h"
+
+
+int main(void){
+	enum
+
+	while(1){
+	}
+	return 0;
+}

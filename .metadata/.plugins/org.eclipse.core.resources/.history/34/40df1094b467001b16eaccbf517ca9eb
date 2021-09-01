@@ -1,0 +1,10 @@
+/*
+ * main.c
+ *
+ *  Created on: Feb 5, 2021
+ *      Author: ceto2
+ */
+#include "STD_TYPE.h"
+#include "BIT_MATH.h"
+include "inter"
+

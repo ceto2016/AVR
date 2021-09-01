@@ -1,0 +1,31 @@
+#include "./Services/STD_TYPE.h"
+#include "./Services/BIT_MATH.h"
+
+#include <util/delay.h>
+#include "MCAL/1-DIO/DIO_interface.h"
+#include "/HAL/4-LCD/CLCD_interface.h"
+#include "/HAL/5-KEYPAD/KPD_interface.h"
+#include "HAL/3-SSD/SSD_interface.h"
+
+
+int main(void){
+	u8 LOC_u8ComeData = 0;
+	SSD_Type LOC_SSD_TypeMYSSD ;
+	LOC_SSD_TypeMYSSD.DataPort = DIO_PORTA;
+	LOC_SSD_TypeMYSSD.EnablePin = DIO_PIN7;
+	LOC_SSD_TypeMYSSD.EnablePort = DIO_PORTA;
+	LOC_SSD_TypeMYSSD.Type = SSD_COMMON_CATHODE;
+	SSD_voidSendNumber(LOC_SSD_TypeMYSSD,2);
+	KPD_voidInit();
+//	CLCD_voidInit();
+
+	while(1){
+
+		LOC_u8ComeData = KPD_u8GetPressed();
+		if( LOC_u8ComeData != 0 ){
+		}
+
+
+	}
+	return 0;
+}

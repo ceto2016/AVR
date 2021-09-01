@@ -1,0 +1,30 @@
+04:55:15 **** Incremental Build of configuration Debug for project EXTI ****
+make all 
+Building file: ../MCAL/03- GIE/GIE_program.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"MCAL/03- GIE/GIE_program.d" -MT"MCAL/03-\ GIE/GIE_program.d" -c -o "MCAL/03- GIE/GIE_program.o" "../MCAL/03- GIE/GIE_program.c"
+Finished building: ../MCAL/03- GIE/GIE_program.c
+ 
+Building file: ../MCAL/01-DIO/DIO_program.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"MCAL/01-DIO/DIO_program.d" -MT"MCAL/01-DIO/DIO_program.o" -c -o "MCAL/01-DIO/DIO_program.o" "../MCAL/01-DIO/DIO_program.c"
+Finished building: ../MCAL/01-DIO/DIO_program.c
+ 
+Building file: ../APP/main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"APP/main.d" -MT"APP/main.o" -c -o "APP/main.o" "../APP/main.c"
+In file included from ../APP/main.c:11:
+c:/my files/emmbeded sys/imt tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../APP/main.c:13:45: error: ../MCAL/02- EXTI/EXTI_interface.h: No such file or directory
+../APP/main.c: In function 'main':
+../APP/main.c:31: warning: implicit declaration of function 'EXTI_voidInit'
+../APP/main.c:32: warning: implicit declaration of function 'EXTI_voidCallBack'
+../APP/main.c:32: error: 'EXTI_LINE0' undeclared (first use in this function)
+../APP/main.c:32: error: (Each undeclared identifier is reported only once
+../APP/main.c:32: error: for each function it appears in.)
+../APP/main.c:33: error: 'EXTI_LINE1' undeclared (first use in this function)
+../APP/main.c:34: error: 'EXTI_LINE2' undeclared (first use in this function)
+make: *** [APP/main.o] Error 1
+
+04:55:17 Build Finished (took 1s.576ms)
+

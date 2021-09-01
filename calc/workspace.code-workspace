@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"name": "calc",
+			"path": "."
+		},
+		{
+			"name": "Services",
+			"path": "..\\interFacing\\Services"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.dart": "dart",
+			"std_type.h": "c"
+		}
+	}
+}
